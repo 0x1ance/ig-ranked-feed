@@ -1,14 +1,8 @@
-
-import { ApolloServer } from "apollo-server-micro";
-import nextConnect from "next-connect";
 import "reflect-metadata";
-
-import { schema } from "@/server/graphql/schema";
-import { context } from "@/server/graphql";
-
+import { ApolloServer } from "apollo-server-micro";
 import type { MicroRequest } from "apollo-server-micro/dist/types";
-
-const connector = nextConnect();
+import { context } from "../../server/graphql";
+import { schema } from "../../server/graphql/schema";
 
 const apolloServer = new ApolloServer({
   context,
@@ -18,14 +12,13 @@ const apolloServer = new ApolloServer({
 
 const startServer = apolloServer.start();
 
-const handler = connector.use(async (req: MicroRequest, res: any) => {
+export default async function handler(req, res) {
+
   await startServer;
-
-  return apolloServer.createHandler({ path: "/api/graphql" })(req, res);
-});
-
-export default handler
-
+  await apolloServer.createHandler({
+    path: "/api/graphql",
+  })(req, res);
+}
 export const config = {
   api: {
     bodyParser: false,

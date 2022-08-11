@@ -6,33 +6,33 @@ import { DateTimeResolver } from "graphql-scalars";
 export class Post extends Node {
   id: string;
 
-  @Field(() => String)
+  @Field(() => String, { simple: true })
   type: "image" | "video";
 
-  @Field((_type) => Int)
+  @Field((_type) => Int, { simple: true })
   likeCount: number;
 
-  @Field((_type) => Int)
+  @Field((_type) => Int, { simple: true })
   commentCount: number;
 
-  @Field((_type) => Boolean)
+  @Field((_type) => Boolean, { simple: true })
   isVideo: boolean;
 
-  @Field()
+  @Field({ simple: true })
   owner: string;
 
-  @Field()
+  @Field({ simple: true })
   shortcode: string;
 
-  @Field((_type=> DateTimeResolver))
+  @Field((_type) => DateTimeResolver, { simple: true })
   createdAt: Date;
 
-  @Field()
+  @Field({ simple: true })
   url: string;
 
-  @Field()
+  @Field({ simple: true })
   thumbnailUrl: string;
 
-  @Field((_type) => Int, { nullable: true })
+  @Field((_type) => Int, { nullable: true, simple: true })
   videoViewCount?: number;
 }
