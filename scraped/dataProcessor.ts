@@ -19,7 +19,8 @@ type RawData = {
   video_view_count?: number;
 };
 
-type ProcessedData = {
+export type ProcessedData = {
+  id: number;
   type: "image" | "video";
   likeCount: number;
   commentCount: number;
@@ -49,7 +50,6 @@ const run = async () => {
   const data_voyaged = JSON.parse(json_voyaged as unknown as string)
     .GraphImages as RawData[];
 
-  console.log("data_9gag: ", data_9gag);
   // process into one
 
   let processedData: ProcessedData[] = [];
@@ -60,20 +60,24 @@ const run = async () => {
     "6665837458": "voyaged",
   };
 
-  for (let dp of [
+  const merged = [
     ...data_9gag,
     ...data_barked,
     ...data_meowed,
     ...data_voyaged,
-  ]) {
+  ];
+
+  for (let i = 0; i < merged.length; i++) {
+    const dp = merged[i];
     processedData.push({
+      id: i,
       type: dp.is_video ? "video" : "image",
       isVideo: dp.is_video,
       likeCount: dp.edge_media_preview_like.count,
       commentCount: dp.edge_media_to_comment.count,
       owner: ownerMap[dp.owner.id],
       shortcode: dp.shortcode,
-      createdAt: dp.taken_at_timestamp,
+      createdAt: new Date(dp.taken_at_timestamp).getTime(),
       url: dp.urls[0],
       thumbnailUrl: dp.display_url,
       videoViewCount: dp.video_view_count,

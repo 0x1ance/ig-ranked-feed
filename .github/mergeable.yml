@@ -1,0 +1,43 @@
+version: 2
+mergeable:
+  - when: pull_request.*
+    name: 'PR WIP check'
+    validate:
+      - do: title
+        must_exclude:
+          regex: 'DO NOT MERGE|WIP|wip|work in progress'
+      - do: label
+        must_exclude:
+          regex: 'wip|WIP|work in progress'
+
+  - when: pull_request.*
+    name: 'PR title check'
+    validate:
+      - do: title
+        must_include:
+          regex: 'feat|fix|improvement|chore'
+          message: >
+            The following problems were found with this pull request:
+              - Title must contains 'feat', 'fix', 'improvement' or 'chore' to indicate the purpose of this PR.
+  - when: pull_request.*
+    name: 'PR description check'
+    validate:
+      - do: description
+        no_empty:
+          enabled: true
+          message: Description matter and should not be empty. Provide detail with **what** was changed, **why** it was changed, and **how** it was changed.
+
+  - when: pull_request.*, pull_request_review.*
+    name: 'Changes requested check'
+    validate:
+      - do: approvals
+        block:
+          changes_requested: true
+          message: This PR has requested changes
+
+  - when: pull_request.*, pull_request_review.*
+    name: 'Approval check'
+    validate:
+      - do: approvals
+        min:
+          count: 1
