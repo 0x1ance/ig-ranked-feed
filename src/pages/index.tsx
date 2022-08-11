@@ -1,9 +1,17 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { PostFilter } from "@/generated/graphql";
+import clsx from "clsx";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { useState } from "react";
+import styles from "../styles/Home.module.css";
+import { CSSTransition } from "react-transition-group";
+import { PopularPostFeed } from "@/features/post/components/PopularPostFeed.component";
+import { RecentPostFeed } from "@/features/post/components/RecentPostFeed.component";
 
 const Home: NextPage = () => {
+  const [tab, setTab] = useState<PostFilter>(PostFilter.Popularity);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,38 +25,41 @@ const Home: NextPage = () => {
           Instagram <a>Ranked Feed</a>
         </h1>
 
-        <p className={styles.description}>
-          switch between tabs to view feeds
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
+        <div className="mt-8 mb-2 tabs tabs-boxed">
           <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
+            className={clsx(
+              "tab",
+              tab === PostFilter.Popularity && "tab-active"
+            )}
+            onClick={() => setTab(PostFilter.Popularity)}
           >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            Popular Post
           </a>
-
           <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
+            className={clsx("tab", tab === PostFilter.Recency && "tab-active")}
+            onClick={() => setTab(PostFilter.Recency)}
           >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            Recent Post
           </a>
+        </div>
+
+        <div className="flex items-center justify-center flex-wrap max-w-[1000px]">
+          <CSSTransition
+            classNames="csstransition-menu--primary"
+            in={tab === PostFilter.Popularity}
+            unmountOnExit
+            timeout={300}
+          >
+            <PopularPostFeed />
+          </CSSTransition>
+          <CSSTransition
+            classNames="csstransition-menu--primary"
+            in={tab === PostFilter.Recency}
+            unmountOnExit
+            timeout={300}
+          >
+            <RecentPostFeed />
+          </CSSTransition>
         </div>
       </main>
 
@@ -58,14 +69,14 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
