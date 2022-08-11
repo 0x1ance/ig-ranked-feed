@@ -19,7 +19,8 @@ type RawData = {
   video_view_count?: number;
 };
 
-type ProcessedData = {
+export type ProcessedData = {
+  id: number;
   type: "image" | "video";
   likeCount: number;
   commentCount: number;
@@ -60,13 +61,17 @@ const run = async () => {
     "6665837458": "voyaged",
   };
 
-  for (let dp of [
+  const merged = [
     ...data_9gag,
     ...data_barked,
     ...data_meowed,
     ...data_voyaged,
-  ]) {
+  ];
+
+  for (let i = 0; i < merged.length; i++) {
+    const dp = merged[i];
     processedData.push({
+      id: i,
       type: dp.is_video ? "video" : "image",
       isVideo: dp.is_video,
       likeCount: dp.edge_media_preview_like.count,
