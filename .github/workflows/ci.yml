@@ -1,0 +1,17 @@
+name: Lumox Server Github CI
+
+# @todo use a more precise condition to reduce running times usage
+on: [push]
+
+env:
+  NODE_OPTIONS: '--max_old_space_size=5120'
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: yarn
+      - name: Test
+        run: yarn test
