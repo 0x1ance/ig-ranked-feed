@@ -24,7 +24,8 @@
     "importHelpers": true,
     "paths": {
       "@assets/*": ["./public/assets/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@test/*": ["src/__tests__/*"]
     },
     "incremental": true
   },
@@ -32,7 +33,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "./src/styles",
+    "./src/styles"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules"]
 }

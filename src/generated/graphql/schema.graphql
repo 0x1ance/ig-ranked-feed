@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
 """An object with a global ID."""
 interface Node {
   """The global ID of the object."""
@@ -26,7 +31,7 @@ type PageInfo {
 
 type Post implements Node {
   commentCount: Int!
-  createdAt: Timestamp!
+  createdAt: DateTime!
 
   """The global ID of the object."""
   id: ID!
@@ -66,6 +71,17 @@ enum PostFilter {
 }
 
 type Query {
+  """Fetches an object given its global ID."""
+  node(
+    """The global ID of the object."""
+    id: ID!
+  ): Node
+
+  """Fetches objects given their global IDs."""
+  nodes(
+    """The global IDs of the objects."""
+    ids: [ID!]!
+  ): [Node]!
   posts(
     """Returns the elements in the list that come after the specified cursor."""
     after: String
@@ -83,8 +99,3 @@ type Query {
     last: Int
   ): PostConnection!
 }
-
-"""
-The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
-"""
-scalar Timestamp

@@ -1,5 +1,6 @@
 import { Directive, Field, Float, ID, Int, ObjectType } from "type-graphql";
 import { Node } from "@/server/graphql/generics";
+import { DateTimeResolver } from "graphql-scalars";
 
 @ObjectType({ implements: [Node] })
 export class Post extends Node {
@@ -23,7 +24,7 @@ export class Post extends Node {
   @Field()
   shortcode: string;
 
-  @Field()
+  @Field((_type=> DateTimeResolver))
   createdAt: Date;
 
   @Field()

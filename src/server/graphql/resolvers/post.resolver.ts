@@ -13,14 +13,17 @@ import { Node } from "@/server/graphql/generics";
 @Service()
 @Resolver(() => Post)
 export class PostResolver {
+
   // TODO: test cases
   @Query(() => PostConnection)
   async posts(
-    @Ctx() {}: GraphqlContextType,
+    @Ctx() ctx: GraphqlContextType,
     @Args(() => PostConnectionArguments)
     args: PostConnectionArguments
   ) {
     const { first, last, before, after, filter } = args;
+    // const first = 2;
+    // let last, before, after;
 
     if ((!first && !last) || (first && last)) {
       throw getApolloError("INPUT", "Invalid Input");
@@ -59,6 +62,9 @@ export class PostResolver {
 
     // page info
     const { length, 0: firstEdge, [length - 1]: lastEdge } = edges;
+    // let length = edges.length;
+    // let firstEdge = edges[0];
+    // let lastEdge = edges[length - 1];
     const lowerBound = after ? afterOffset + 1 : 0;
     const upperBound = before ? Math.min(beforeOffset, totalCount) : totalCount;
     const pageInfo = {
