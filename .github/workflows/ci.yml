@@ -1,4 +1,4 @@
-name: Lumox Server Github CI
+name: Ig Rank Feed Github CI
 
 # @todo use a more precise condition to reduce running times usage
 on: [push]
