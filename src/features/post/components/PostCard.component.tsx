@@ -35,32 +35,39 @@ export const PostCard: FC<{ post: PostFragment }> = ({ post }) => {
 };
 
 const PostVideoDisplay: FC = () => {
-//   const videoRef = useRef(null);
+  const videoRef = useRef(null);
   const { post, isVisible } = usePostCardContext();
 
-  // useEffect(() => {
-  //   if (isVisible) {
-  //     videoRef.current.play();
-  //   } else {
-  //     if (videoRef.current.play) {
-  //       videoRef.current.pause();
-  //     }
-  //   }
-  // }, [isVisible]);
+  useEffect(() => {
+    if (isVisible) {
+      videoRef.current.play();
+    } else {
+      if (videoRef.current.play) {
+        videoRef.current.pause();
+      }
+    }
+  }, [isVisible]);
 
   return (
     <div className="w-full bg-red-100 aspect-square rounded flex flex-col items-center justify-center overflow-hidden">
       {/* {post.type} {isVisible && "hi"} */}
-      {/* <video
-        width="320"
-        height="240"
+      <video
+        width="100%"
+        height="100%"
         loop
         ref={videoRef}
         crossOrigin="anonymous"
       >
         <source src={post.url} type="video/mp4" />
-      </video> */}
-      <div className={clsx('font-bold', isVisible ? 'text-red-400':'text-blue-400')}>{isVisible ? "video playing" : "video paused"}</div>
+      </video>
+      <div
+        className={clsx(
+          "font-bold",
+          isVisible ? "text-blue-400" : "text-red-400"
+        )}
+      >
+        {isVisible ? "video playing" : "video paused"}
+      </div>
       <div className="hover:underline">{post.url}</div>
     </div>
   );
