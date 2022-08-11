@@ -1,4 +1,4 @@
-import { GraphqlContextType } from "@/server/graphql/context";
+import type { GraphqlContextType } from "@/server/graphql/context";
 import { fromGlobalId, toGlobalId } from "graphql-relay";
 import {
   Arg,

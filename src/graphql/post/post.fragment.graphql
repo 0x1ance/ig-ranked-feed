@@ -1,0 +1,13 @@
+fragment Post on Post {
+  id
+  type
+  likeCount
+  commentCount
+  isVideo
+  owner
+  shortcode
+  createdAt
+  url
+  thumbnailUrl
+  videoViewCount
+}

@@ -3,7 +3,6 @@ import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorCon
 @ValidatorConstraint({ async: false })
 export class CannotWithConstraint implements ValidatorConstraintInterface {
   validate(_value: unknown, { constraints, ...args }: ValidationArguments): boolean {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const object = args.object as any;
 
     return constraints.every(constraint => !object[constraint]);
@@ -18,7 +17,6 @@ export class CannotWithConstraint implements ValidatorConstraintInterface {
 
 export function CannotWith(props: Array<string>, options?: ValidationOptions) {
   return function (
-    // eslint-disable-next-line @typescript-eslint/ban-types
     { constructor: target }: Object,
     propertyName: string,
   ): void {

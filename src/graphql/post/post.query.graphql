@@ -1,0 +1,51 @@
+query PopularPosts($before: String, $after: String, $first: Int, $last: Int) {
+  posts(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    filter: POPULARITY
+  ) {
+    edges {
+      node {
+        ... on Post {
+          ...Post
+        }
+      }
+      cursor
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+    totalCount
+  }
+}
+
+query RecentPosts($before: String, $after: String, $first: Int, $last: Int) {
+  posts(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    filter: RECENCY
+  ) {
+    edges {
+      node {
+        ... on Post {
+          ...Post
+        }
+      }
+      cursor
+    }
+    pageInfo {
+      startCursor
+      endCursor
+      hasPreviousPage
+      hasNextPage
+    }
+    totalCount
+  }
+}
