@@ -1,5 +1,6 @@
-import { ConnectionCursor, PageInfo as RelayPageInfo } from 'graphql-relay';
+import { PageInfo as RelayPageInfo } from 'graphql-relay';
 import { Field, ObjectType } from 'type-graphql';
+import type { ConnectionCursor } from "graphql-relay";
 
 @ObjectType({ description: 'Information about pagination in a connection.' })
 export class PageInfo implements RelayPageInfo {

@@ -2,7 +2,7 @@ import { getOffsetWithDefault, offsetToCursor } from "graphql-relay";
 
 import { Resolver, Query, Ctx, Args, Authorized } from "type-graphql";
 import { Service } from "typedi";
-import { GraphqlContextType } from "../context";
+import type { GraphqlContextType } from "../context";
 import { getApolloError } from "../error";
 import DataStore from "../services/datastore";
 import { Post } from "../types";

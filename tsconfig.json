@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -23,9 +27,15 @@
     "outDir": "./dist",
     "importHelpers": true,
     "paths": {
-      "@assets/*": ["./public/assets/*"],
-      "@/*": ["./src/*"],
-      "@test/*": ["src/__tests__/*"]
+      "@assets/*": [
+        "./public/assets/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@test/*": [
+        "src/__tests__/*"
+      ]
     },
     "incremental": true
   },
@@ -35,5 +45,7 @@
     "**/*.tsx",
     "./src/styles"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -3,7 +3,6 @@ import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorCon
 @ValidatorConstraint({ async: false })
 export class EitherOrConstraint implements ValidatorConstraintInterface {
   validate(value: unknown, { constraints, ...args }: ValidationArguments): boolean {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const object = args.object as any;
     const [relatedPropertyName] = constraints;
     const relatedPropertyValue = object[relatedPropertyName];
@@ -18,7 +17,6 @@ export class EitherOrConstraint implements ValidatorConstraintInterface {
 
 export function EitherOr(target: string, options?: ValidationOptions) {
   return function (
-    // eslint-disable-next-line @typescript-eslint/ban-types
     { constructor: target }: Object,
     propertyName: string,
   ): void {
