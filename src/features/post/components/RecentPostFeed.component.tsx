@@ -16,21 +16,21 @@ export const RecentPostFeed = () => {
   if (!data) {
     return <div>no post yet</div>;
   }
-  
+
   return (
     <>
       <InfiniteScroll
         className="card min-h-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-6 gap-y-6"
-        dataLength={data.posts.edges.length} //This is important field to render the next data
+        dataLength={data?.posts?.edges.length} //This is important field to render the next data
         next={() => {
           fetchMore({
             variables: {
               first: 20,
-              after: data.posts.pageInfo.endCursor,
+              after: data?.posts?.pageInfo.endCursor,
             },
           });
         }}
-        hasMore={data.posts.pageInfo.hasNextPage}
+        hasMore={data?.posts?.pageInfo.hasNextPage}
         loader={<h4>Loading...</h4>}
         endMessage={
           <div
@@ -43,7 +43,7 @@ export const RecentPostFeed = () => {
           </div>
         }
       >
-        {data.posts.edges.map((edge, idx) => (
+        {data?.posts?.edges.map((edge, idx) => (
           <PostCard key={idx} post={edge.node}></PostCard>
         ))}
       </InfiniteScroll>
