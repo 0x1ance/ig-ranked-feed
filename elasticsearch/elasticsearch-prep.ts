@@ -28,7 +28,6 @@ const prep = async () => {
     });
   } catch (err) {}
 
-  console.log('DataStore: ',DataStore)
   const dataset = DataStore.map((el, idx) => {
     return {
       ...el,

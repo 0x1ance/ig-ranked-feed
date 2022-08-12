@@ -4,7 +4,6 @@ import { Resolver, Query, Ctx, Args, Authorized } from "type-graphql";
 import { Service } from "typedi";
 import type { GraphqlContextType } from "../context";
 import { getApolloError } from "../error";
-import DataStore from "../services/datastore";
 import { Post } from "../types";
 import { PostConnection } from "../types/dtos/post.connection";
 import { PostConnectionArguments } from "../types/dtos/posts.args";
@@ -52,7 +51,6 @@ export class PostResolver {
 
     // get records
     const records = await datastore.getPosts(skip, take, filter);
-
     // generate edges
     const edges = records.map((record, index) => ({
       cursor: offsetToCursor(startOffset + index),

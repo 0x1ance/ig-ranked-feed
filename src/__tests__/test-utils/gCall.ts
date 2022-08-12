@@ -36,6 +36,9 @@ export const gCall = async ({
       getPosts: async (skip, take, filter) => {
         return DataStore.slice(skip, skip + take) as unknown as Post[];
       },
+      fetchPostsFromElasticSearch: () => {
+        return null;
+      },
     },
   };
   return graphql({

@@ -74,7 +74,6 @@ const PostVideoDisplay: FC = () => {
 };
 const PostImageDisplay: FC = () => {
   const { post } = usePostCardContext();
-  console.log("image post code: ", post);
   return (
     <div className="w-full aspect-square rounded relative">
       <Image src={post.url} layout="fill" alt="" objectFit="cover" />
