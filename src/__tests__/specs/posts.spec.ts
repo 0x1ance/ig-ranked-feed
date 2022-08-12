@@ -1,4 +1,4 @@
-import DataStore from '@/server/graphql/services/datastore';
+import DataStore from '../../../scraped/processed.json'
 import { getPosts } from './../test-callers/getPosts';
 
 describe("POST QUERIES: UNIT TEST - posts", () => {

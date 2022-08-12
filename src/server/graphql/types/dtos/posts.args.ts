@@ -2,7 +2,7 @@ import { ConnectionArguments } from "@/server/graphql/generics";
 import { ArgsType, Field, ID } from "type-graphql";
 import { registerEnumType } from "type-graphql";
 
-enum PostFilter {
+export enum PostFilter {
   POPULARITY,
   RECENCY,
 }
