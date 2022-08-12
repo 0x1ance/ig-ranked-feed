@@ -8,6 +8,10 @@ const nextConfig = {
       "scontent-hkg4-1.cdninstagram.com",
     ],
   },
+  serverRuntimeConfig: {
+    REDIS_URL: "",
+  },
+  publicRuntimeConfig: {},
 };
 
 module.exports = nextConfig;
