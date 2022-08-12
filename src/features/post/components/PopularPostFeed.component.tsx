@@ -13,6 +13,9 @@ export const PopularPostFeed = () => {
 
   if (loading) return <div>loading</div>;
 
+  if (!data) {
+    return <div>no post yet</div>;
+  }
   return (
     <>
       <InfiniteScroll
@@ -39,7 +42,7 @@ export const PopularPostFeed = () => {
           </div>
         }
       >
-        {data.posts.edges.map((edge, idx) => (
+        {data?.posts?.edges.map((edge, idx) => (
           <PostCard key={idx} post={edge.node}></PostCard>
         ))}
       </InfiniteScroll>

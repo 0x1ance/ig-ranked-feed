@@ -13,6 +13,10 @@ export const RecentPostFeed = () => {
   
   if (loading) return <div>loading</div>;
 
+  if (!data) {
+    return <div>no post yet</div>;
+  }
+  
   return (
     <>
       <InfiniteScroll
