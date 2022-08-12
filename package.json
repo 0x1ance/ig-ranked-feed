@@ -10,10 +10,13 @@
     "test": "jest --clear-cache && jest --forceExit --detectOpenHandles",
     "process-data": "ts-node ./scraped/dataProcessor.ts",
     "codegen": "graphql-codegen --config codegen.yml",
-    "scrape": "instagram-scraper barked -u username -p password -t video image -m 50 --media-metadata"
+    "scrape": "instagram-scraper barked -u username -p password -t video image -m 50 --media-metadata",
+    "es-prep": "ts-node ./elasticsearch/elasticsearch-prep.ts",
+    "es-search": "ts-node ./elasticsearch/elasticsearch-search.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@elastic/elasticsearch": "^8.2.1",
     "@heroicons/react": "^1.0.6",
     "apollo-server-micro": "^3.10.0",
     "class-validator": "^0.13.2",

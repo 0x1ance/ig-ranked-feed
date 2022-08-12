@@ -13,11 +13,10 @@ import { Node } from "@/server/graphql/generics";
 @Service()
 @Resolver(() => Post)
 export class PostResolver {
-
   // TODO: test cases
   @Query(() => PostConnection)
   async posts(
-    @Ctx() ctx: GraphqlContextType,
+    @Ctx() { datastore }: GraphqlContextType,
     @Args(() => PostConnectionArguments)
     args: PostConnectionArguments
   ) {
@@ -30,7 +29,7 @@ export class PostResolver {
     }
 
     // totalCount
-    const totalCount = DataStore.length;
+    const totalCount = await datastore.getTotalPostCount();
 
     // offsets
     const beforeOffset = getOffsetWithDefault(before, totalCount);
@@ -52,7 +51,7 @@ export class PostResolver {
     const take = Math.max(endOffset - startOffset, 1); // sql limit
 
     // get records
-    const records = DataStore.slice(skip, skip + take);
+    const records = await datastore.getPosts(skip, take, filter);
 
     // generate edges
     const edges = records.map((record, index) => ({
